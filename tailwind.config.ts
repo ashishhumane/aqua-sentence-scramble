@@ -47,6 +47,22 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Ocean theme colors
+        ocean: {
+          deep: "hsl(var(--ocean-deep))",
+          mid: "hsl(var(--ocean-mid))",
+          light: "hsl(var(--ocean-light))",
+        },
+        coral: {
+          pink: "hsl(var(--coral-pink))",
+          orange: "hsl(var(--coral-orange))",
+        },
+        treasure: {
+          gold: "hsl(var(--treasure-gold))",
+        },
+        seaweed: {
+          green: "hsl(var(--seaweed-green))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -65,25 +81,53 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
+          "50%": { transform: "translateY(-10px) rotate(2deg)" },
+        },
+        bubble: {
+          "0%, 100%": { transform: "translateY(0px) scale(1)", opacity: "0.7" },
+          "50%": { transform: "translateY(-20px) scale(1.1)", opacity: "1" },
+        },
+        shake: {
+          "0%, 100%": { transform: "translateX(0)" },
+          "25%": { transform: "translateX(-5px)" },
+          "75%": { transform: "translateX(5px)" },
+        },
+        "treasure-glow": {
+          "0%": { boxShadow: "0 0 20px hsl(45 100% 60% / 0.3)" },
+          "100%": { boxShadow: "0 0 40px hsl(45 100% 60% / 0.6)" },
+        },
+        "word-drop": {
+          "0%": { transform: "translateY(-20px) scale(0.8)", opacity: "0" },
+          "100%": { transform: "translateY(0) scale(1)", opacity: "1" },
+        },
+        "success-bounce": {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.1)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        float: "float 3s ease-in-out infinite",
+        bubble: "bubble 4s ease-in-out infinite",
+        shake: "shake 0.5s ease-in-out",
+        "treasure-glow": "treasure-glow 2s ease-in-out infinite alternate",
+        "word-drop": "word-drop 0.3s ease-out",
+        "success-bounce": "success-bounce 0.6s ease-in-out",
+      },
+      boxShadow: {
+        float: "var(--shadow-float)",
+        ocean: "var(--shadow-ocean)",
+        treasure: "var(--shadow-treasure)",
       },
     },
   },
