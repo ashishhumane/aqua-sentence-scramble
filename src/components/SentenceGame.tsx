@@ -72,6 +72,7 @@ const SentenceGame: React.FC = () => {
   const [isShaking, setIsShaking] = useState<boolean>(false);
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
   const [draggedWord, setDraggedWord] = useState<string | null>(null);
+  const [shuffledWords, setShuffledWords] = useState<string[]>([]);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -84,6 +85,12 @@ const SentenceGame: React.FC = () => {
 
     return () => clearInterval(timer);
   }, [startTime]);
+
+  // Shuffle words when sentence changes
+  useEffect(() => {
+    setShuffledWords(shuffleArray([...currentSentence.words]));
+    setUserOrder([]);
+  }, [currentSentence.id]);
 
   const shuffleArray = (array: string[]) => {
     const shuffled = [...array];
@@ -179,12 +186,13 @@ const SentenceGame: React.FC = () => {
   const nextSentence = () => {
     const nextIndex = (sentences.findIndex(s => s.id === currentSentence.id) + 1) % sentences.length;
     setCurrentSentence(sentences[nextIndex]);
-    setUserOrder([]);
+    // userOrder will be reset in useEffect when currentSentence changes
   };
 
   const resetGame = () => {
     setCurrentSentence(sentences[0]);
     setUserOrder([]);
+    setShuffledWords(shuffleArray([...sentences[0].words]));
     setGameStats({
       score: 0,
       accuracy: 0,
@@ -198,7 +206,7 @@ const SentenceGame: React.FC = () => {
     setShowSuccess(false);
   };
 
-  const availableWords = shuffleArray(currentSentence.words.filter(word => !userOrder.includes(word)));
+  const availableWords = shuffledWords.filter(word => !userOrder.includes(word));
 
   return (
     <div className="min-h-screen relative overflow-hidden">
